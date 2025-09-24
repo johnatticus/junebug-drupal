@@ -1,0 +1,14 @@
+{#
+Custom override for Main navigation to use .nav styles
+#}
+
+<nav class="nav shadow">
+  <h1 class="parkinsans-extra-bold">Junebug</h1> {# Replace with site name or logo if you want #}
+  <ul class="parkinsans-bold">
+    {% for item in items %}
+    <li{{ item.attributes }}>
+      <a href="{{ item.url }}">{{ item.title }}</a>
+      </li>
+      {% endfor %}
+  </ul>
+</nav>
