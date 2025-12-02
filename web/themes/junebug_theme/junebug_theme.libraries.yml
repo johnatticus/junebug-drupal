@@ -2,6 +2,7 @@
 global:
   js:
     js/junebug-theme.js: {}
+    js/color-rotate.js: {}
   css:
     base:
       css/base/elements.css: {}

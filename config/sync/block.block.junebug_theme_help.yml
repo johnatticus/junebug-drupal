@@ -1,0 +1,22 @@
+uuid: 2122a652-dd15-417b-ad8a-44d9c06a9c70
+langcode: en
+status: false
+dependencies:
+  module:
+    - help
+  theme:
+    - junebug_theme
+_core:
+  default_config_hash: VfPFqqxfkomud5CO8DUijw85QIl9GIxh_nIxLOYESxg
+id: junebug_theme_help
+theme: junebug_theme
+region: header
+weight: 0
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Help
+  label_display: '0'
+  provider: help
+visibility: {  }

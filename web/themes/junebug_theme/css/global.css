@@ -149,7 +149,12 @@
 
 .nav a:hover {
   color: var(--pink);
+}
 
+.img-fixed {
+  width: 250px;
+  height: auto;
+  /* display: block; */
 }
 
 /* site wide */

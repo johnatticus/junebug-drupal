@@ -1,0 +1,22 @@
+uuid: 22e2b150-af95-4510-b56a-100eb2469c26
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - junebug_theme
+_core:
+  default_config_hash: VhBzWb7lMRtIOg9G7VSw_0uopi-7zXeHq4vXqqV1HFE
+id: junebug_theme_breadcrumbs
+theme: junebug_theme
+region: breadcrumb
+weight: 0
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  label_display: '0'
+  provider: system
+visibility: {  }

@@ -10,5 +10,10 @@ Custom override for Main navigation to use .nav styles
       <a href="{{ item.url }}">{{ item.title }}</a>
       </li>
       {% endfor %}
+      {# Extra auth links on the right, only for anonymous users #}
+    {% if not logged_in %}
+      <li><a href="/user/register">Signup</a></li>
+      <li><a href="/user/login">Login</a></li>
+    {% endif %}
   </ul>
 </nav>

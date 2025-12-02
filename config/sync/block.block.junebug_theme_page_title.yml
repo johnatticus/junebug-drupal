@@ -1,0 +1,20 @@
+uuid: 82122962-fbab-40c4-a551-4c0ddee7fba1
+langcode: en
+status: false
+dependencies:
+  theme:
+    - junebug_theme
+_core:
+  default_config_hash: 6aOgWsNTXjqrDm98TXSAjP6qd2nCijD1xw45MrnbK-Y
+id: junebug_theme_page_title
+theme: junebug_theme
+region: header
+weight: -5
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  label_display: '0'
+  provider: core
+visibility: {  }
