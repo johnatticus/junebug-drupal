@@ -27,3 +27,40 @@ function junebug_theme_preprocess_page(array &$variables): void {
 function junebug_theme_preprocess_node(array &$variables): void {
 
 }
+
+/**
+ * Helper: return the current path alias without leading slash.
+ */
+function _junebug_theme_current_alias(): string {
+  $current_path = \Drupal::service('path.current')->getPath();
+  $alias = \Drupal::service('path_alias.manager')->getAliasByPath($current_path);
+  return trim($alias, '/');
+}
+
+/**
+ * Add alias-based suggestions for the 'page' hook.
+ * Example: /about -> page--about.html.twig
+ */
+function junebug_theme_theme_suggestions_page(array &$suggestions, array $variables): void {
+  $alias = _junebug_theme_current_alias();
+  if ($alias === '' || str_starts_with($alias, 'admin') || str_starts_with($alias, 'node/')) {
+    return;
+  }
+  $sanitized = strtr($alias, ['/' => '__', '-' => '_']);
+  $suggestions[] = 'page__' . $sanitized; // -> page--about.html.twig
+}
+
+/**
+ * Fallback/alter: ensure the suggestion exists even if the first hook didn't fire.
+ */
+function junebug_theme_theme_suggestions_page_alter(array &$suggestions, array $variables, $hook): void {
+  $alias = _junebug_theme_current_alias();
+  if ($alias === '' || str_starts_with($alias, 'admin') || str_starts_with($alias, 'node/')) {
+    return;
+  }
+  $sanitized = strtr($alias, ['/' => '__', '-' => '_']);
+  $candidate = 'page__' . $sanitized;
+  if (!in_array($candidate, $suggestions, true)) {
+    $suggestions[] = $candidate;
+  }
+}

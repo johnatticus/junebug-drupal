@@ -1,6 +1,6 @@
-{{ page.messages }}
+{% extends "@junebug_theme/layout/page.html.twig" %}
 
-<div class="container">
+{% block main_content %}
 
   <div class="row">
     <div class="container-color flex-grow-1 shadow green parkinsans-regular">
@@ -28,7 +28,9 @@
     </div>
   </div>
 
-  {# Keep your node body if you want it below the cards #}
-  {# <div class="row"><div class="column flex-grow-1"><div class="container-color off-white">{{ page.content }}</div></div></div> #}
+  {# If you ALSO want the "Home" node body below your custom hero/cards, keep parent(): #}
+  {# {{ parent() }} #}
 
-</div>
+{% endblock %}
+
+

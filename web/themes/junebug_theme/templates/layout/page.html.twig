@@ -1,0 +1,22 @@
+{# Base page template for ALL pages #}
+
+{{ page.messages }}
+
+<div class="container">
+  <header>
+    {# Put your Main navigation block in Header or Primary menu region via UI #}
+    {{ page.header }}
+    {{ page.primary_menu }}
+  </header>
+
+  <main role="main">
+    {# This block is what pages (like the front page) can override #}
+    {% block main_content %}
+      {{ page.content }}
+    {% endblock %}
+  </main>
+
+  <footer>
+    {{ page.footer }}
+  </footer>
+</div>

@@ -1,0 +1,47 @@
+{% extends "@junebug_theme/layout/page.html.twig" %} {# or "@junebug_theme/layout/page.html.twig" if that's where your
+base lives #}
+
+{% block main_content %}
+<div class="row no-wrap">
+  <div class="column">
+    <img class="shadow-small about-image" src="{{ base_path }}themes/junebug_theme/images/me.jpeg" alt="Me" />
+  </div>
+
+  <div class="column flex-grow-2">
+    <div class="container-color shadow yellow parkinsans-regular padding-2">
+      <h2 class="parkinsans-regular">My name is Nora. My grandpa calls me Junebug.</h2>
+      <h2 class="parkinsans-regular">I'm 2 and do a lot of things. I love critters, bugs, nature...all that stuff. I
+        live near an airport so I watch planes come and go. It never gets old.</h2>
+      <h2 class="parkinsans-regular">My dad made me this website. I don't know how it works but I think dad does.</h2>
+    </div>
+
+    <div class="row w-100">
+      <div class="column flex-grow-1">
+        <div class="container-color shadow yellow parkinsans-regular">
+          <h2 class="parkinsans-regular">I like:</h2>
+          <ul class="parkinsans-regular about-ul">
+            <li>🐄 Farm animals</li>
+            <li>🕶️ Sunglasses</li>
+            <li>🕷️ Spiders</li>
+            <li>🥦 Green beans</li>
+            <li>🎠 Swing sets and Carousels</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="column flex-grow-1">
+        <div class="container-color shadow yellow parkinsans-regular">
+          <h2 class="parkinsans-regular">My favorite:</h2>
+          <ul class="parkinsans-regular about-ul">
+            <li>Color? Purple 💜</li>
+            <li>Fruit? Banana 🍌</li>
+            <li>Drink? Apple Juice 🧃</li>
+            <li>Book? Goodnight Goon 👹</li>
+            <li>Toy? Mango 🐈</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
