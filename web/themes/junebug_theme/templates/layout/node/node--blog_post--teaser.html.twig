@@ -1,0 +1,47 @@
+{# Blog teaser card, styled like your Headline component #}
+<article class="container-color container-headline flex-grow-1 shadow green parkinsans-regular" role="article">
+
+  {# Left: post type icon (swap logic later if you add an 'image' type) #}
+  <div class="mr-1">
+    <img src="{{ base_path }}themes/junebug_theme/images/post.svg" alt="post" class="post-type-icon" />
+  </div>
+
+  {# Middle: title (link) + byline + date #}
+  <div class="flex-grow-1">
+    <h2 class="parkinsans-bold" style="margin:0;">
+      <a class="link" href="{{ url }}">{{ label }}</a>
+    </h2>
+
+    <p class="mt-0_5">
+      posted by
+      <strong class="link">{{ author_name }}</strong>
+      <span class="muted">on {{ date }}</span>
+    </p>
+
+    {# Excerpt: prefer field_excerpt; fallback to body summary #}
+    <div class="mt-0_5">
+      {% if content.field_excerpt is defined %}
+      {{ content.field_excerpt }}
+      {% else %}
+      {{ content.body['#summary'] is defined ? content.body['#summary'] : '' }}
+      {% endif %}
+    </div>
+
+    <div class="mt-1">
+      <a class="parkinsans-bold" href="{{ url }}">Read more →</a>
+    </div>
+  </div>
+
+  {# Right: like/comment visual placeholders (non-functional for now) #}
+  <div class="ml-1 align-center">
+    <button class="icon-btn" aria-label="Like">
+      <img src="{{ base_path }}themes/junebug_theme/images/like.svg" alt="" />
+    </button>
+    <span class="count badge">0</span>
+
+    <button class="icon-btn" aria-label="Comments">
+      <img src="{{ base_path }}themes/junebug_theme/images/comment.svg" alt="" />
+    </button>
+    <span class="count badge">0</span>
+  </div>
+</article>

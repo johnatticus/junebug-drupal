@@ -1,0 +1,39 @@
+{% extends "@junebug_theme/layout/page.html.twig" %}
+
+{% block main_content %}
+
+{# Page hero / heading #}
+<div class="row">
+  <div class="container-color green shadow w-100">
+    <h1 class="parkinsans-extra-bold headline">Blog</h1>
+    <p class="parkinsans-regular">Latest posts, updates, and assorted Junebug chaos.</p>
+  </div>
+</div>
+
+{# Optional: filters/search row (add later, or place blocks here) #}
+<div class="row">
+  <div class="container-color off-white shadow w-100">
+    {# You can place a search or tag filter block here later #}
+    {# Example: {{ drupal_block('search_form_block') }} (if enabled) #}
+  </div>
+</div>
+
+{# The View output for /blog goes here. Keep it wrapped to match your CSS. #}
+<div class="row">
+  <div class="column flex-grow-2">
+    <div class="container-color off-white shadow">
+      {{ page.content }}
+    </div>
+  </div>
+
+  {# Optional sidebar (shows if you place blocks in Sidebar first via UI) #}
+  {% if page.sidebar_first %}
+  <aside class="column flex-grow-1">
+    <div class="container-color off-white shadow">
+      {{ page.sidebar_first }}
+    </div>
+  </aside>
+  {% endif %}
+</div>
+
+{% endblock %}
