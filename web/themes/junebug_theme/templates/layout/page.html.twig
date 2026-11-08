@@ -3,18 +3,18 @@
 {{ page.messages }}
 
 <div class="container">
-  <header>
+  <header class="row">
     {# Put your Main navigation block in Header or Primary menu region via UI #}
     {{ page.header }}
     {{ page.primary_menu }}
   </header>
 
-  <main role="main">
+  {# <main role="main"> #}
     {# This block is what pages (like the front page) can override #}
     {% block main_content %}
-      {{ page.content }}
+    {{ page.content }}
     {% endblock %}
-  </main>
+    {# </main> #}
 
   <footer>
     {{ page.footer }}
