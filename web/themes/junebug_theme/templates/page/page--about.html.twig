@@ -1,25 +1,27 @@
-{% extends "@junebug_theme/layout/page.html.twig" %} {# or "@junebug_theme/layout/page.html.twig" if that's where your
-base lives #}
+{% extends "@junebug_theme/layout/page.html.twig" %}
 
 {% block main_content %}
-<div class="row no-wrap">
-  <div class="column">
-    <img class="shadow-small about-image" src="{{ base_path }}themes/junebug_theme/images/me.jpeg" alt="Me"
-      style="width: 300px;" />
-  </div>
-
-  <div class="column flex-grow-2">
-    <div class="container-color shadow yellow parkinsans-regular padding-2">
-      <h2 class="parkinsans-regular">My name is Nora. My grandpa calls me Junebug.</h2>
-      <h2 class="parkinsans-regular">I'm 2 and do a lot of things. I love critters, bugs, nature...all that stuff. I
-        live near an airport so I watch planes come and go. It never gets old.</h2>
-      <h2 class="parkinsans-regular">My dad made me this website. I don't know how it works but I think dad does.</h2>
+  <section class="about" aria-labelledby="about-title">
+    <div class="about__portrait">
+      <img
+        class="shadow-small about__image"
+        src="{{ base_path ~ directory ~ '/images/me.jpeg' }}"
+        alt="Nora"
+        width="200"
+        height="352"
+      />
     </div>
 
-    <div class="row" style="width: 100%;">
-      <div class="column flex-grow-1">
-        <div class="container-color shadow yellow parkinsans-regular">
-          <h2 class="parkinsans-regular">I like:</h2>
+    <div class="about__content">
+      <div class="container-color shadow yellow about__intro">
+        <h1 id="about-title" class="parkinsans-bold">My name is Nora. My grandpa calls me Junebug.</h1>
+        <p>I'm 2 and do a lot of things. I love critters, bugs, nature...all that stuff. I live near an airport, so I watch planes come and go. It never gets old.</p>
+        <p>My dad made me this website. I don't know how it works, but I think Dad does.</p>
+      </div>
+
+      <div class="about__cards">
+        <section class="container-color shadow yellow about__card">
+          <h2 class="parkinsans-bold">I like:</h2>
           <ul class="parkinsans-regular about-ul">
             <li>🐄 Farm animals</li>
             <li>🕶️ Sunglasses</li>
@@ -27,12 +29,10 @@ base lives #}
             <li>🥦 Green beans</li>
             <li>🎠 Swing sets and Carousels</li>
           </ul>
-        </div>
-      </div>
+        </section>
 
-      <div class="column flex-grow-1">
-        <div class="container-color shadow yellow parkinsans-regular">
-          <h2 class="parkinsans-regular">My favorite:</h2>
+        <section class="container-color shadow yellow about__card">
+          <h2 class="parkinsans-bold">My favorite:</h2>
           <ul class="parkinsans-regular about-ul">
             <li>Color? Purple 💜</li>
             <li>Fruit? Banana 🍌</li>
@@ -40,9 +40,8 @@ base lives #}
             <li>Book? Goodnight Goon 👹</li>
             <li>Toy? Mango 🐈</li>
           </ul>
-        </div>
+        </section>
       </div>
     </div>
-  </div>
-</div>
+  </section>
 {% endblock %}
