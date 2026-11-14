@@ -1,0 +1,19 @@
+uuid: 721512d1-742f-4384-9296-ad2cf8e93338
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_about_heading
+    - node.type.page
+id: node.page.field_about_heading
+field_name: field_about_heading
+entity_type: node
+bundle: page
+label: 'About heading'
+description: 'Main heading shown in the large About card.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -4,8 +4,15 @@ status: true
 dependencies:
   config:
     - field.field.node.page.body
+    - field.field.node.page.field_about_favorites
+    - field.field.node.page.field_about_heading
+    - field.field.node.page.field_about_intro
+    - field.field.node.page.field_about_likes
+    - field.field.node.page.field_about_portrait
+    - image.style.thumbnail
     - node.type.page
   module:
+    - image
     - path
     - text
 _core:
@@ -30,6 +37,46 @@ content:
     weight: 10
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_about_favorites:
+    type: string_textfield
+    weight: 24
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_about_heading:
+    type: string_textfield
+    weight: 20
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_about_intro:
+    type: text_textarea
+    weight: 22
+    region: content
+    settings:
+      rows: 6
+      placeholder: ''
+    third_party_settings: {  }
+  field_about_likes:
+    type: string_textfield
+    weight: 23
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_about_portrait:
+    type: image_image
+    weight: 21
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
     third_party_settings: {  }
   path:
     type: path

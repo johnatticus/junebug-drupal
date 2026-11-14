@@ -50,8 +50,15 @@
   justify-content: center;
 }
 
-.about__image {
+.about__portrait .field,
+.about__portrait img {
   width: min(100%, 18rem);
+}
+
+.about__portrait img {
+  border: 2px solid #000;
+  border-radius: 10px;
+  box-shadow: 2px 2px #000;
 }
 
 .about__content {

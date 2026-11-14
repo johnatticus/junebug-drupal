@@ -18,6 +18,33 @@ function junebug_theme_preprocess_html(array &$variables): void {
  * Implements hook_preprocess_HOOK() for page.html.twig.
  */
 function junebug_theme_preprocess_page(array &$variables): void {
+  if (empty($variables['node']) || !$variables['node'] instanceof \Drupal\node\NodeInterface) {
+    return;
+  }
+
+  $node = $variables['node'];
+  if (_junebug_theme_current_alias() !== 'about' || !$node->hasField('field_about_heading')) {
+    return;
+  }
+
+  $variables['about_heading'] = $node->get('field_about_heading')->value;
+  $variables['about_portrait'] = $node->get('field_about_portrait')->view([
+    'label' => 'hidden',
+    'type' => 'image',
+    'settings' => [
+      'image_link' => '',
+      'image_style' => '',
+      'image_loading' => [
+        'attribute' => 'eager',
+      ],
+    ],
+  ]);
+  $variables['about_intro'] = $node->get('field_about_intro')->view([
+    'label' => 'hidden',
+    'type' => 'text_default',
+  ]);
+  $variables['about_likes'] = array_column($node->get('field_about_likes')->getValue(), 'value');
+  $variables['about_favorites'] = array_column($node->get('field_about_favorites')->getValue(), 'value');
 
 }
 

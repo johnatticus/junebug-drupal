@@ -1,0 +1,38 @@
+uuid: 12a5e065-df56-4ea2-a4f3-24441788505e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_about_portrait
+    - node.type.page
+  module:
+    - image
+id: node.page.field_about_portrait
+field_name: field_about_portrait
+entity_type: node
+bundle: page
+label: 'About portrait'
+description: 'Portrait shown on the About page.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:file'
+  handler_settings: {  }
+  file_directory: about
+  file_extensions: 'png gif jpg jpeg webp'
+  max_filesize: ''
+  max_resolution: ''
+  min_resolution: ''
+  alt_field: true
+  alt_field_required: true
+  title_field: false
+  title_field_required: false
+  default_image:
+    uuid: ''
+    alt: ''
+    title: ''
+    width: null
+    height: null
+field_type: image
