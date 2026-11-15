@@ -3,42 +3,31 @@
 {% block main_content %}
   <section class="about" aria-labelledby="about-title">
     <div class="about__portrait">
-      <img
-        class="shadow-small about__image"
-        src="{{ base_path ~ directory ~ '/images/me.jpeg' }}"
-        alt="Nora"
-        width="200"
-        height="352"
-      />
+      {{ about_portrait }}
     </div>
 
     <div class="about__content">
       <div class="container-color shadow yellow about__intro">
-        <h1 id="about-title" class="parkinsans-bold">My name is Nora. My grandpa calls me Junebug.</h1>
-        <p>I'm 2 and do a lot of things. I love critters, bugs, nature...all that stuff. I live near an airport, so I watch planes come and go. It never gets old.</p>
-        <p>My dad made me this website. I don't know how it works, but I think Dad does.</p>
+        <h1 id="about-title" class="parkinsans-bold">{{ about_heading }}</h1>
+        {{ about_intro }}
       </div>
 
       <div class="about__cards">
         <section class="container-color shadow yellow about__card">
           <h2 class="parkinsans-bold">I like:</h2>
           <ul class="parkinsans-regular about-ul">
-            <li>🐄 Farm animals</li>
-            <li>🕶️ Sunglasses</li>
-            <li>🕷️ Spiders</li>
-            <li>🥦 Green beans</li>
-            <li>🎠 Swing sets and Carousels</li>
+            {% for item in about_likes %}
+              <li>{{ item }}</li>
+            {% endfor %}
           </ul>
         </section>
 
         <section class="container-color shadow yellow about__card">
           <h2 class="parkinsans-bold">My favorite:</h2>
           <ul class="parkinsans-regular about-ul">
-            <li>Color? Purple 💜</li>
-            <li>Fruit? Banana 🍌</li>
-            <li>Drink? Apple Juice 🧃</li>
-            <li>Book? Goodnight Goon 👹</li>
-            <li>Toy? Mango 🐈</li>
+            {% for item in about_favorites %}
+              <li>{{ item }}</li>
+            {% endfor %}
           </ul>
         </section>
       </div>

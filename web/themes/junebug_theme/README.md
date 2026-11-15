@@ -25,6 +25,9 @@ accessible markup, smaller CSS scope, and safer asset handling.
   Drupal's menu administration when they are wanted in navigation.
 - The About page uses one page heading, paragraphs for biography text, proper
   subsection headings, and a responsive two-column layout.
+- The About heading, portrait, biography, likes, and favorites are editable on
+  the About node rather than being hard-coded in Twig. These optional fields
+  are attached to the standard Page type and are rendered only by `/about`.
 - The Blog page owns its visible page heading while the base template owns the
   surrounding page structure.
 - Blog Post teaser preprocessing now targets the configured `blog_post`
@@ -71,6 +74,25 @@ Drupal-generated markup.
 - Git attributes treat JPEG files as binary, preventing whitespace checks and
   text diffs from interpreting image bytes as source code.
 
+### Editing the About page
+
+Edit node 2 (`/node/2/edit`) to update the content shown at `/about`:
+
+- **About heading** controls the large heading in the yellow biography card.
+- **About portrait** supports an editable image and required alternative text.
+- **About biography** supports formatted paragraph content.
+- **Things I like** and **Favorite things** are multi-value text fields; use
+  one list item per row.
+
+The fields are optional because they belong to the shared Page content type and
+should not prevent other Page nodes from being saved. The current portrait was
+copied into Drupal's public file storage at `public://about/nora.jpeg`.
+
+Configuration for the field definitions and Page form/view displays is tracked
+in `config/sync`. Node field values and the managed portrait file are content,
+so deployments must also transfer the database and public files or recreate
+that content in the destination environment.
+
 ### Validation performed
 
 - PHP syntax validation passed for `junebug_theme.theme`.
@@ -86,8 +108,6 @@ Drupal-generated markup.
 
 - The Blog View allows authenticated users only, so anonymous requests to
   `/blog` return 403. Decide whether the blog should be public.
-- About content, including Nora's age, is hard-coded in Twig. Move it into
-  Drupal-managed content if it should be editable without a code change.
 - Parkinsans is loaded from Google Fonts. Self-host it if third-party font
   requests are undesirable.
 - Add Signup/Login as Drupal menu links if anonymous account links should

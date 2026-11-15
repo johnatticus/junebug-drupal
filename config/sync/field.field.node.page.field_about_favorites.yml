@@ -1,0 +1,19 @@
+uuid: d8dbcf48-e80d-421c-959a-e0b81cdedd3b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_about_favorites
+    - node.type.page
+id: node.page.field_about_favorites
+field_name: field_about_favorites
+entity_type: node
+bundle: page
+label: 'Favorite things'
+description: 'One item per row, such as “Color? Purple 💜”.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

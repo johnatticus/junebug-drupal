@@ -5,6 +5,11 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.page.body
+    - field.field.node.page.field_about_favorites
+    - field.field.node.page.field_about_heading
+    - field.field.node.page.field_about_intro
+    - field.field.node.page.field_about_likes
+    - field.field.node.page.field_about_portrait
     - node.type.page
   module:
     - text
@@ -27,4 +32,9 @@ content:
   links:
     weight: 101
     region: content
-hidden: {  }
+hidden:
+  field_about_favorites: true
+  field_about_heading: true
+  field_about_intro: true
+  field_about_likes: true
+  field_about_portrait: true
