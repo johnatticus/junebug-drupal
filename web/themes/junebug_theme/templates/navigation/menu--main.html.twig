@@ -1,19 +1,34 @@
-{#
-Custom override for Main navigation to use .nav styles
-#}
+{% import _self as menus %}
 
-<nav class="nav flex-grow-1 shadow">
-  <h1 class="parkinsans-extra-bold">Junebug</h1> {# Replace with site name or logo if you want #}
-  <ul class="parkinsans-bold">
-    {% for item in items %}
-    <li{{ item.attributes }}>
-      <a href="{{ item.url }}">{{ item.title }}</a>
-      </li>
-      {% endfor %}
-      {# Extra auth links on the right, only for anonymous users #}
-      {% if not logged_in %}
-      <li><a href="/user/register">Signup</a></li>
-      <li><a href="/user/login">Login</a></li>
-      {% endif %}
-  </ul>
+<nav class="nav shadow" aria-label="Main navigation">
+  <a class="nav__brand parkinsans-extra-bold" href="{{ path('<front>') }}">Junebug</a>
+  {{ menus.menu_links(items, attributes, 0) }}
 </nav>
+
+{% macro menu_links(items, attributes, menu_level) %}
+  {% import _self as menus %}
+
+  {% if items %}
+    {% if menu_level == 0 %}
+      <ul{{ attributes.addClass('nav__menu', 'parkinsans-bold') }}>
+    {% else %}
+      <ul class="nav__submenu">
+    {% endif %}
+
+    {% for item in items %}
+      {% set item_classes = [
+        'nav__item',
+        item.is_expanded ? 'nav__item--expanded',
+        item.is_collapsed ? 'nav__item--collapsed',
+        item.in_active_trail ? 'nav__item--active-trail',
+      ] %}
+      <li{{ item.attributes.addClass(item_classes) }}>
+        {{ link(item.title, item.url, {class: ['nav__link']}) }}
+        {% if item.below %}
+          {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
+        {% endif %}
+      </li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endmacro %}

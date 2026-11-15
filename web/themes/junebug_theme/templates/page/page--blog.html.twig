@@ -1,27 +1,14 @@
 {% extends "@junebug_theme/layout/page.html.twig" %}
 
 {% block main_content %}
+  <section class="blog-page" aria-labelledby="blog-title">
+    <header class="container-color green shadow blog-page__header">
+      <h1 id="blog-title" class="parkinsans-extra-bold headline">Blog</h1>
+      <p>Latest posts, updates, and assorted Junebug chaos.</p>
+    </header>
 
-{# Page hero / heading #}
-{# <div class="row">
-  <div class="container-color flex-grow-1 green shadow">
-    <h1 class="parkinsans-extra-bold headline">Blog</h1>
-    <p class="parkinsans-regular">Latest posts, updates, and assorted Junebug chaos.</p>
-  </div>
-</div> #}
-
-{# The View output for /blog goes here. Keep it wrapped to match your CSS. #}
-<div class="row">
-  {{ page.content }}
-
-  {# Optional sidebar (shows if you place blocks in Sidebar first via UI) #}
-  {% if page.sidebar_first %}
-  <aside class="column flex-grow-1">
-    <div class="container-color off-white shadow">
-      {{ page.sidebar_first }}
+    <div class="blog-page__content">
+      {{ page.content }}
     </div>
-  </aside>
-  {% endif %}
-</div>
-
+  </section>
 {% endblock %}
