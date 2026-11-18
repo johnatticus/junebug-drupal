@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @file
+ * Install and uninstall hooks for Junebug Access.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function junebug_access_install(): void {
+  node_access_rebuild(TRUE);
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function junebug_access_uninstall(): void {
+  node_access_rebuild(TRUE);
+}
+

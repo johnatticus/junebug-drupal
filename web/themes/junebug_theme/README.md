@@ -106,12 +106,11 @@ that content in the destination environment.
 
 ### Decisions still open
 
-- The Blog View allows authenticated users only, so anonymous requests to
-  `/blog` return 403. Decide whether the blog should be public.
+- Signup and Login modal links still need to be added to the main navigation.
+  Account requests now require administrator approval; Blog Posts are private
+  to approved members, with publishing limited to the Contributor role.
 - Parkinsans is loaded from Google Fonts. Self-host it if third-party font
   requests are undesirable.
-- Add Signup/Login as Drupal menu links if anonymous account links should
-  return to the main navigation.
 
 ## Pre-push checks
 
