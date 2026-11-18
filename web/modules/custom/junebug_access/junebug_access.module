@@ -1,0 +1,70 @@
+<?php
+
+/**
+ * @file
+ * Access rules for private Junebug Blog Posts.
+ */
+
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Access\AccessResultInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\node\NodeInterface;
+
+/**
+ * The node-access grant ID shared by approved, authenticated members.
+ */
+const JUNEBUG_ACCESS_MEMBER_GRANT_ID = 1;
+
+/**
+ * Implements hook_node_access().
+ *
+ * Explicitly deny anonymous access even if another module grants broad access.
+ */
+function junebug_access_node_access(NodeInterface $node, string $operation, AccountInterface $account): AccessResultInterface {
+  if ($operation === 'view' && $node->bundle() === 'blog_post' && $account->isAnonymous()) {
+    return AccessResult::forbidden()
+      ->addCacheContexts(['user.roles:anonymous'])
+      ->addCacheableDependency($node);
+  }
+
+  return AccessResult::neutral();
+}
+
+/**
+ * Implements hook_node_access_records().
+ *
+ * Add a private realm to Blog Posts so Views, search, and entity queries respect
+ * the same member-only rule as direct node pages.
+ */
+function junebug_access_node_access_records(NodeInterface $node): array {
+  if ($node->bundle() !== 'blog_post') {
+    return [];
+  }
+
+  return [
+    [
+      'realm' => 'junebug_blog',
+      'gid' => JUNEBUG_ACCESS_MEMBER_GRANT_ID,
+      'grant_view' => 1,
+      'grant_update' => 1,
+      'grant_delete' => 1,
+      'priority' => 0,
+    ],
+  ];
+}
+
+/**
+ * Implements hook_node_grants().
+ *
+ * Drupal only authenticates active, administrator-approved accounts, so every
+ * signed-in user is an approved member. Normal content permissions still decide
+ * whether that member may update or delete a Blog Post.
+ */
+function junebug_access_node_grants(AccountInterface $account, string $operation): array {
+  if ($account->isAnonymous()) {
+    return [];
+  }
+
+  return ['junebug_blog' => [JUNEBUG_ACCESS_MEMBER_GRANT_ID]];
+}
+

@@ -1,0 +1,8 @@
+name: Junebug Access
+type: module
+description: 'Keeps Blog Posts private to approved members.'
+package: Junebug
+core_version_requirement: ^11
+dependencies:
+  - drupal:node
+

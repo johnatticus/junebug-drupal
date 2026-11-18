@@ -1,0 +1,21 @@
+uuid: 9bf8b5f8-520c-4136-acb7-43e8dbebb282
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.blog_post
+    - taxonomy.vocabulary.tags
+  module:
+    - node
+    - taxonomy
+id: contributor
+label: Contributor
+weight: 4
+is_admin: false
+permissions:
+  - 'create blog_post content'
+  - 'create terms in tags'
+  - 'delete own blog_post content'
+  - 'edit own blog_post content'
+  - 'view own unpublished content'
+
