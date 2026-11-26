@@ -1,0 +1,206 @@
+.junebug-auth-dialog.ui-dialog {
+  max-width: calc(100vw - 2rem);
+  padding: 0;
+  overflow: hidden;
+  background: var(--yellow);
+  border: 3px solid #000;
+  border-radius: 12px;
+  box-shadow: 6px 6px #000;
+  font-family: "Parkinsans", sans-serif;
+}
+
+.junebug-auth-dialog .ui-dialog-titlebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  background: var(--pink);
+  border: 0;
+  border-bottom: 2px solid #000;
+}
+
+.junebug-auth-dialog .ui-dialog-title {
+  float: none;
+  margin: 0;
+  color: #000;
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.junebug-auth-dialog .ui-dialog-titlebar-close {
+  position: static;
+  width: 2.25rem;
+  height: 2.25rem;
+  margin: 0;
+  color: #000;
+  background: #fff;
+  border: 2px solid #000;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.junebug-auth-dialog .ui-dialog-titlebar-close:hover,
+.junebug-auth-dialog .ui-dialog-titlebar-close:focus-visible {
+  background: var(--blue);
+}
+
+.junebug-auth-dialog .ui-dialog-titlebar-close:focus-visible,
+.junebug-auth-dialog :is(input, button, a):focus-visible {
+  outline: 3px solid #000;
+  outline-offset: 3px;
+}
+
+.junebug-auth-dialog .ui-dialog-content {
+  padding: clamp(1.25rem, 5vw, 2.5rem);
+  overflow-x: hidden;
+  background: var(--yellow);
+}
+
+.junebug-auth-form,
+.junebug-auth-form .form-wrapper {
+  display: grid;
+  gap: 1rem;
+}
+
+.junebug-auth-form .form-item,
+.junebug-auth-form .form-actions,
+.junebug-auth-form p {
+  margin: 0;
+}
+
+.junebug-auth-form label:not(.option) {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-weight: 700;
+}
+
+.junebug-auth-form :is(input[type="email"], input[type="password"], input[type="text"]) {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.65rem 0.9rem;
+  color: #000;
+  background: #fff;
+  border: 2px solid #000;
+  border-radius: 10px;
+  font: inherit;
+}
+
+.junebug-auth-form input[type="file"] {
+  max-width: 100%;
+  font: inherit;
+}
+
+.junebug-auth-form input[type="file"]::file-selector-button,
+.junebug-auth-form :is(input[type="submit"], button) {
+  padding: 0.65rem 1rem;
+  color: #000;
+  background: #ffc7ad;
+  border: 2px solid #000;
+  border-radius: 10px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.junebug-auth-form input[type="file"]::file-selector-button {
+  margin-right: 0.75rem;
+  background: var(--blue);
+}
+
+.junebug-auth-form :is(input[type="submit"], button):hover,
+.junebug-auth-form :is(input[type="submit"], button):focus-visible {
+  background: var(--pink);
+}
+
+.junebug-auth-form .description,
+.junebug-auth-form .auth-form__intro {
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.junebug-auth-form .form-required::after {
+  content: " *";
+}
+
+.junebug-auth-form .auth-form__secondary-link {
+  justify-self: start;
+  color: #000;
+  font-weight: 700;
+  text-underline-offset: 0.2em;
+}
+
+@media (max-width: 445px) {
+  .junebug-auth-dialog.ui-dialog {
+    max-width: calc(100vw - 1rem);
+  }
+
+  .junebug-auth-dialog .ui-dialog-content {
+    padding: 1rem;
+  }
+}
+
+/* Account request confirmation */
+
+.account-requested {
+  display: grid;
+  gap: 1.25rem;
+  width: min(100%, 48rem);
+  margin-inline: auto;
+  padding: clamp(1.5rem, 5vw, 3rem);
+  text-align: left;
+}
+
+.account-requested :is(h1, p) {
+  margin: 0;
+}
+
+.account-requested h1 {
+  font-size: clamp(2rem, 6vw, 3rem);
+  line-height: 1.15;
+}
+
+.account-requested__eyebrow {
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.account-requested__steps {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  padding-left: 1.5rem;
+  line-height: 1.5;
+}
+
+.account-requested__note {
+  padding-top: 1rem;
+  border-top: 2px solid #000;
+  line-height: 1.5;
+}
+
+.account-requested__note a {
+  color: #000;
+  font-weight: 700;
+  text-underline-offset: 0.2em;
+}
+
+.account-requested__home {
+  justify-self: start;
+  padding: 0.75rem 1rem;
+  color: #000;
+  background: #ffc7ad;
+  border: 2px solid #000;
+  border-radius: 10px;
+  text-decoration: none;
+}
+
+.account-requested__home:hover,
+.account-requested__home:focus-visible {
+  background: var(--pink);
+}
+
+.account-requested__home:focus-visible {
+  outline: 3px solid #000;
+  outline-offset: 3px;
+}

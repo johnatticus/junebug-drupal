@@ -1,0 +1,8 @@
+junebug_auth.account_requested:
+  path: '/account-requested'
+  defaults:
+    _controller: '\Drupal\junebug_auth\Controller\AccountRequestedController::build'
+    _title: 'Account request received'
+  requirements:
+    _access: 'TRUE'
+

@@ -1,0 +1,8 @@
+name: Junebug Accounts
+type: module
+description: 'Provides the Junebug account-request confirmation workflow.'
+package: Junebug
+core_version_requirement: ^11
+dependencies:
+  - drupal:user
+
