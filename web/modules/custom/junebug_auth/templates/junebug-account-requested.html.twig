@@ -1,0 +1,19 @@
+<section class="account-requested container-color yellow shadow" aria-labelledby="account-requested-title">
+  <p class="account-requested__eyebrow parkinsans-bold">Request submitted</p>
+  <h1 id="account-requested-title" class="parkinsans-extra-bold">Your account request was received</h1>
+  <p>Thank you for requesting access to the private family blog.</p>
+
+  <ol class="account-requested__steps">
+    <li>Check your email for confirmation that the request was received.</li>
+    <li>An administrator will review and approve your account.</li>
+    <li>After approval, you will receive another email with a one-time link.</li>
+    <li>Follow that link to create your password and sign in.</li>
+  </ol>
+
+  <p class="account-requested__note">
+    If the password link expires, use <a href="{{ path('user.pass') }}">Forgot your password?</a> to request another one.
+  </p>
+
+  <a class="account-requested__home parkinsans-bold" href="{{ path('<front>') }}">Return home</a>
+</section>
+

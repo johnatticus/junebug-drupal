@@ -2,6 +2,11 @@
 
 declare(strict_types=1);
 
+use Drupal\Component\Render\MarkupInterface;
+use Drupal\Component\Serialization\Json;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
+
 /**
  * @file
  * Functions to support theming in the junebug_theme theme.
@@ -49,6 +54,101 @@ function junebug_theme_preprocess_page(array &$variables): void {
 }
 
 /**
+ * Implements hook_preprocess_HOOK() for menu.html.twig.
+ */
+function junebug_theme_preprocess_menu(array &$variables): void {
+  if (($variables['menu_name'] ?? '') !== 'main') {
+    return;
+  }
+
+  $account = \Drupal::currentUser();
+  $destination = \Drupal::request()->getPathInfo();
+  $items = [];
+  $cache_contexts = [
+    'url.path',
+    'user.roles:anonymous',
+  ];
+
+  if ($account->isAnonymous()) {
+    $items[] = _junebug_theme_account_link(
+      t('Signup'),
+      Url::fromRoute('user.register'),
+      TRUE,
+    );
+    $items[] = _junebug_theme_account_link(
+      t('Login'),
+      Url::fromRoute('user.login', [], ['query' => ['destination' => $destination]]),
+      TRUE,
+    );
+  }
+  else {
+    $items[] = _junebug_theme_account_link(
+      t('My account'),
+      Url::fromRoute('user.page'),
+    );
+    $items[] = _junebug_theme_account_link(t('Logout'), Url::fromRoute('user.logout'));
+    $cache_contexts[] = 'user';
+  }
+
+  $account_menu = [
+    '#theme' => 'item_list',
+    '#items' => $items,
+    '#attributes' => [
+      'class' => ['nav__account-menu', 'parkinsans-bold'],
+      'aria-label' => t('Account'),
+    ],
+    '#cache' => [
+      'contexts' => $cache_contexts,
+    ],
+  ];
+
+  if ($account->isAnonymous()) {
+    $account_menu['#attached']['library'][] = 'core/drupal.dialog.ajax';
+  }
+
+  $variables['junebug_account_menu'] = $account_menu;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for user_login_form.
+ */
+function junebug_theme_form_user_login_form_alter(array &$form, FormStateInterface $form_state, string $form_id): void {
+  $form['#attributes']['class'][] = 'junebug-auth-form';
+  $form['forgot_password'] = [
+    '#type' => 'link',
+    '#title' => t('Forgot your password?'),
+    '#url' => Url::fromRoute('user.pass'),
+    '#weight' => 100,
+    '#attributes' => _junebug_theme_dialog_attributes(['auth-form__secondary-link']),
+  ];
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for user_register_form.
+ */
+function junebug_theme_form_user_register_form_alter(array &$form, FormStateInterface $form_state, string $form_id): void {
+  $form['#attributes']['class'][] = 'junebug-auth-form';
+  $form['account_help'] = [
+    '#type' => 'container',
+    '#weight' => -100,
+    '#attributes' => ['class' => ['auth-form__intro']],
+    'text' => [
+      '#markup' => '<p>' . t('Request an account for access to the private family blog. After an administrator approves it, you will receive email instructions to set your password.') . '</p>',
+    ],
+  ];
+
+  // Personal contact forms are not part of the member signup experience.
+  unset($form['contact']);
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for user_pass.
+ */
+function junebug_theme_form_user_pass_alter(array &$form, FormStateInterface $form_state, string $form_id): void {
+  $form['#attributes']['class'][] = 'junebug-auth-form';
+}
+
+/**
  * Implements hook_preprocess_HOOK() for node.html.twig.
  */
 function junebug_theme_preprocess_node(array &$variables): void {
@@ -70,6 +170,38 @@ function _junebug_theme_current_alias(): string {
   $current_path = \Drupal::service('path.current')->getPath();
   $alias = \Drupal::service('path_alias.manager')->getAliasByPath($current_path);
   return trim($alias, '/');
+}
+
+/**
+ * Builds a navigation link for an account action.
+ */
+function _junebug_theme_account_link(string|MarkupInterface $title, Url $url, bool $dialog = FALSE): array {
+  $attributes = ['class' => ['nav__link']];
+  if ($dialog) {
+    $attributes = _junebug_theme_dialog_attributes(['nav__link', 'auth-dialog__trigger']);
+  }
+
+  return [
+    '#type' => 'link',
+    '#title' => $title,
+    '#url' => $url,
+    '#attributes' => $attributes,
+  ];
+}
+
+/**
+ * Returns attributes that load a route in Drupal's core modal dialog.
+ */
+function _junebug_theme_dialog_attributes(array $classes = []): array {
+  return [
+    'class' => array_merge(['use-ajax'], $classes),
+    'data-dialog-type' => 'modal',
+    'data-dialog-options' => Json::encode([
+      'classes' => ['ui-dialog' => 'junebug-auth-dialog'],
+      'width' => 'min(42rem, calc(100vw - 2rem))',
+    ]),
+    'aria-haspopup' => 'dialog',
+  ];
 }
 
 /**

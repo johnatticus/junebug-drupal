@@ -1,0 +1,44 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * @file
+ * Account-request workflow behavior for the Junebug site.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\user\UserInterface;
+
+/**
+ * Implements hook_theme().
+ */
+function junebug_auth_theme(): array {
+  return [
+    'junebug_account_requested' => [
+      'variables' => [],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for user_register_form.
+ */
+function junebug_auth_form_user_register_form_alter(array &$form, FormStateInterface $form_state, string $form_id): void {
+  if (\Drupal::routeMatch()->getRouteName() !== 'user.register') {
+    return;
+  }
+
+  $form['actions']['submit']['#submit'][] = 'junebug_auth_registration_redirect_submit';
+}
+
+/**
+ * Redirects a successful public account request to its confirmation page.
+ */
+function junebug_auth_registration_redirect_submit(array &$form, FormStateInterface $form_state): void {
+  $account = $form_state->get('user');
+  if ($account instanceof UserInterface && !$account->isNew()) {
+    $form_state->setRedirect('junebug_auth.account_requested');
+  }
+}
+

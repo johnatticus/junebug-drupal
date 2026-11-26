@@ -9,6 +9,7 @@ global:
     base:
       css/base/elements.css: {}
     component:
+      css/component/auth-dialog.css: {}
       css/component/menu.css: {}
       css/component/node.css: {}
     layout:

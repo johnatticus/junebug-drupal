@@ -1,9 +1,12 @@
 {% import _self as menus %}
 
-<nav class="nav shadow" aria-label="Main navigation">
+<div class="nav shadow">
   <a class="nav__brand parkinsans-extra-bold" href="{{ path('<front>') }}">Junebug</a>
-  {{ menus.menu_links(items, attributes, 0) }}
-</nav>
+  <div class="nav__links">
+    {{ menus.menu_links(items, attributes, 0) }}
+    {{ junebug_account_menu }}
+  </div>
+</div>
 
 {% macro menu_links(items, attributes, menu_level) %}
   {% import _self as menus %}

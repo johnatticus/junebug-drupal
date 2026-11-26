@@ -21,8 +21,8 @@ accessible markup, smaller CSS scope, and safer asset handling.
   state.
 - The Junebug brand is a link to Drupal's configured front route instead of an
   `h1` on every page.
-- Signup and Login are no longer injected by Twig. Add account links through
-  Drupal's menu administration when they are wanted in navigation.
+- Account actions are generated from Drupal routes rather than static Twig
+  URLs. Anonymous and authenticated sessions receive the appropriate links.
 - The About page uses one page heading, paragraphs for biography text, proper
   subsection headings, and a responsive two-column layout.
 - The About heading, portrait, biography, likes, and favorites are editable on
@@ -57,6 +57,9 @@ Drupal-generated markup.
 ### JavaScript
 
 - The theme library explicitly depends on `core/drupal` and `core/once`.
+- Signup, Login, and password-reset links use Drupal core's AJAX dialog
+  library. The same routes remain available as normal pages when JavaScript is
+  unavailable.
 - The console-only placeholder behavior was removed.
 - Color rotation is initialized once per heading and its timer is cleared when
   Drupal detaches the element.
@@ -93,6 +96,27 @@ in `config/sync`. Node field values and the managed portrait file are content,
 so deployments must also transfer the database and public files or recreate
 that content in the destination environment.
 
+### Member account dialogs
+
+Anonymous visitors see **Signup** and **Login** beside the main menu. Signup
+opens Drupal's account-request form with email, username, and an optional
+profile picture. Because registration requires administrator approval, Drupal
+emails password setup instructions only after an administrator activates the
+account. Successful requests redirect to `/account-requested`, which explains
+the approval and password-creation sequence. Login includes a modal
+password-reset link.
+
+Authenticated members instead see **My account** and **Logout**. The account
+links use `user.roles:anonymous`, `url.path`, and—when authenticated—`user`
+cache contexts so Drupal's render cache does not leak one session state into
+another. Drupal generates the Logout CSRF token through a session-specific
+placeholder. Login returns the member to the page from which the dialog was
+opened.
+
+Dialog styling is scoped to `.junebug-auth-dialog` in
+`css/component/auth-dialog.css`; it does not apply generic rules to Drupal's
+administrative forms.
+
 ### Validation performed
 
 - PHP syntax validation passed for `junebug_theme.theme`.
@@ -106,9 +130,8 @@ that content in the destination environment.
 
 ### Decisions still open
 
-- Signup and Login modal links still need to be added to the main navigation.
-  Account requests now require administrator approval; Blog Posts are private
-  to approved members, with publishing limited to the Contributor role.
+- Blog Posts are private to approved members, with publishing limited to the
+  Contributor role. Comments and likes remain future features.
 - Parkinsans is loaded from Google Fonts. Self-host it if third-party font
   requests are undesirable.
 
